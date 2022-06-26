@@ -1,0 +1,107 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+//extending Frame class to our class Example10  
+public class dna_to_rna extends Frame implements ActionListener {    
+
+JButton submitButton = new JButton("Submit");  
+Label label =new Label("dna string");
+JTextField text= new JTextField();
+JTextField DNA_String = new JTextField(10);
+JTextField RNA_String = new JTextField(10);
+
+
+public dna_to_rna() {  
+
+ 
+   JFrame frame = new JFrame("Transcription");
+   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   
+   
+   JPanel inFieldPane = new JPanel();
+   inFieldPane.setLayout(new GridLayout(2,2));
+   inFieldPane.add(new JLabel("Enter DNA String"));
+   DNA_String.addActionListener(this);
+   
+   inFieldPane.add(DNA_String);
+   frame.add(inFieldPane,BorderLayout.NORTH);
+ 
+// Add submission button
+   JPanel submitPane = new JPanel();
+   submitPane.setLayout(new FlowLayout());
+   submitPane.add(new JLabel("Press Button to Convert DNA To RNA"));
+   submitButton.addActionListener(this);
+   
+   submitPane.add(submitButton);
+   frame.add(submitPane,BorderLayout.SOUTH);
+   
+// Add Output fields
+   JPanel outFieldPane = new JPanel();
+   outFieldPane.setLayout(new GridLayout(2,2));
+   outFieldPane.add(new JLabel("Equivalent RNA String"));
+   
+   outFieldPane.add(RNA_String);
+   frame.add(outFieldPane,BorderLayout.CENTER);
+ 
+//   label.setBounds(20, 80, 80, 30);  
+//   text.setBounds(20, 100, 80, 40);  
+//   submitButton.setBounds(110, 100, 80, 30);  
+//  
+//   add(l);
+//   add(t);
+//   add(b);  
+
+ 
+//   setSize(300,300);  
+
+ 
+//   setTitle("Transcription");  
+//   setLayout(null);
+   
+   frame.pack();
+   frame.setVisible(true);
+
+}
+
+public void actionPerformed (ActionEvent e)
+        {
+           // Display full name if and only if button was pushed
+           if (e.getSource() == submitButton)
+           {
+          try{
+          char[] readdna;
+          readdna=DNA_String.getText().toCharArray();
+
+          for(int x=0;x<readdna.length;x++)
+          {
+          if(readdna[x]=='c'|| readdna[x]=='C')
+          readdna[x]='g';
+          else if(readdna[x]=='g'|| readdna[x]=='G')
+          readdna[x]='c';
+          else if(readdna[x]=='a'|| readdna[x]=='A')
+          readdna[x]='u';
+          else
+          readdna[x]='a';
+          }
+         
+          String rna= new String(readdna);
+//           System.out.println(readdna);
+         
+          RNA_String.setText(rna);
+        }
+        catch(Exception e1)
+          {
+        System.out.println("exception");
+          }
+        }
+          }
+
+public static void main(String args[])
+{  
+
+//Example fr = new Example();
+new dna_to_rna();
+}  
+
+}    
